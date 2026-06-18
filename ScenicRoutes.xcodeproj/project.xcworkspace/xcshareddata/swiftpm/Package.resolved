@@ -1,13 +1,13 @@
 {
-  "originHash" : "3a88b801789bdebe832a3bc00fc25bff08077857a0a957c14d3bbed5501ae620",
+  "originHash" : "d7c51d1bd220eb356f35d971800b298ad8c78d05efe94d008564fbf995332404",
   "pins" : [
     {
       "identity" : "mapbox-common-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mapbox/mapbox-common-ios.git",
       "state" : {
-        "revision" : "3cbd3eba5a316e4213b4860db398d5777f9de957",
-        "version" : "24.6.1"
+        "revision" : "6deb996e5ea100a7692b832c89b211b03918d413",
+        "version" : "24.25.0"
       }
     },
     {
@@ -15,17 +15,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mapbox/mapbox-core-maps-ios.git",
       "state" : {
-        "revision" : "80f08d877ff8a6ba1ad46d357e7863bb0a98f414",
-        "version" : "11.6.1"
+        "revision" : "f482e7d5211edbf9b4373177a76869dd6256e7a7",
+        "version" : "11.25.0"
       }
     },
     {
-      "identity" : "mapbox-directions-swift",
+      "identity" : "mapbox-core-search-ios",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/mapbox/mapbox-directions-swift.git",
+      "location" : "https://github.com/mapbox/mapbox-core-search-ios.git",
       "state" : {
-        "revision" : "4b5e49ac3e980f36f5d64c8a4cba752b397a0281",
-        "version" : "2.14.3"
+        "revision" : "87644234d78b6afd5ef9b6b75ba00ed7984edec5",
+        "version" : "2.25.0"
       }
     },
     {
@@ -33,17 +33,35 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mapbox/mapbox-maps-ios.git",
       "state" : {
-        "revision" : "c502416eaadd90891cb2a1d2d62f57a52dcfbfa5",
-        "version" : "11.6.1"
+        "revision" : "8f8eec8cdc91a629404f04d2dd30eb5109fca8e8",
+        "version" : "11.25.0"
       }
     },
     {
-      "identity" : "polyline",
+      "identity" : "mapbox-navigation-ios",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/raphaelmor/Polyline.git",
+      "location" : "https://github.com/mapbox/mapbox-navigation-ios.git",
       "state" : {
-        "revision" : "353f80378dcd8f17eefe8550090c6b1ae3c9da23",
-        "version" : "5.1.0"
+        "revision" : "d443947419bfd1d9a1adf44bbd64a36c7fd400a5",
+        "version" : "3.25.0"
+      }
+    },
+    {
+      "identity" : "mapbox-navigation-native-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mapbox/mapbox-navigation-native-ios.git",
+      "state" : {
+        "revision" : "70c2d72f53e7b9914180a29d20f9e39304b700de",
+        "version" : "324.25.0"
+      }
+    },
+    {
+      "identity" : "search-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mapbox/search-ios.git",
+      "state" : {
+        "revision" : "24d9e23dc6e4a66b2b8c0bf3ff01a96a36a10ed2",
+        "version" : "2.25.0"
       }
     },
     {
@@ -56,12 +74,48 @@
       }
     },
     {
+      "identity" : "swift-custom-dump",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-custom-dump",
+      "state" : {
+        "revision" : "b9b59eb58c946236d6f16305c576ad194c36444e",
+        "version" : "1.6.0"
+      }
+    },
+    {
+      "identity" : "swift-snapshot-testing",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-snapshot-testing.git",
+      "state" : {
+        "revision" : "ad5e3190cc63dc288f28546f9c6827efc1e9d495",
+        "version" : "1.19.2"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-syntax",
+      "state" : {
+        "revision" : "79e4b74a295b6eb74a8b585e3a39d29e70c1dbd1",
+        "version" : "603.0.2"
+      }
+    },
+    {
       "identity" : "turf-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mapbox/turf-swift.git",
       "state" : {
-        "revision" : "213050191cfcb3d5aa76e1fa90c6ff1e182a42ca",
-        "version" : "2.8.0"
+        "revision" : "bf840e6b9529d105687840fe2c9dcd74197d46d1",
+        "version" : "4.0.0"
+      }
+    },
+    {
+      "identity" : "xctest-dynamic-overlay",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
+      "state" : {
+        "revision" : "cb281f343fd953280336dcbd3822cdf47c182f5b",
+        "version" : "1.10.0"
       }
     }
   ],
