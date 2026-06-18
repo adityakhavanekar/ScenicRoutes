@@ -7,15 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A5C93962FE393260028FDD2 /* MapboxDirections in Frameworks */ = {isa = PBXBuildFile; productRef = 0A5C93952FE393260028FDD2 /* MapboxDirections */; };
-		0A5C93982FE393260028FDD2 /* MapboxNavigationCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0A5C93972FE393260028FDD2 /* MapboxNavigationCore */; };
-		0A5C939A2FE393260028FDD2 /* MapboxNavigationUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A5C93992FE393260028FDD2 /* MapboxNavigationUIKit */; };
-		0A5C939C2FE393260028FDD2 /* _MapboxNavigationLocalization in Frameworks */ = {isa = PBXBuildFile; productRef = 0A5C939B2FE393260028FDD2 /* _MapboxNavigationLocalization */; };
-		0A5C939E2FE393260028FDD2 /* _MapboxNavigationTestKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A5C939D2FE393260028FDD2 /* _MapboxNavigationTestKit */; };
-		0A5C93A02FE393260028FDD2 /* mapbox-directions-swift in Frameworks */ = {isa = PBXBuildFile; productRef = 0A5C939F2FE393260028FDD2 /* mapbox-directions-swift */; };
-		0A5C93A32FE393400028FDD2 /* MapboxMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 0A5C93A22FE393400028FDD2 /* MapboxMaps */; };
 		0A5C93A62FE3935C0028FDD2 /* MapboxSearch in Frameworks */ = {isa = PBXBuildFile; productRef = 0A5C93A52FE3935C0028FDD2 /* MapboxSearch */; };
 		0A5C93A82FE3935C0028FDD2 /* MapboxSearchUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0A5C93A72FE3935C0028FDD2 /* MapboxSearchUI */; };
+		0A5C93AB2FE4462F0028FDD2 /* MapboxMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 0A5C93AA2FE4462F0028FDD2 /* MapboxMaps */; };
+		0A5C93AE2FE446F20028FDD2 /* MapboxDirections in Frameworks */ = {isa = PBXBuildFile; productRef = 0A5C93AD2FE446F20028FDD2 /* MapboxDirections */; };
+		0A5C93B02FE446F20028FDD2 /* MapboxNavigationCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0A5C93AF2FE446F20028FDD2 /* MapboxNavigationCore */; };
+		0A5C93B22FE446F20028FDD2 /* MapboxNavigationUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A5C93B12FE446F20028FDD2 /* MapboxNavigationUIKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,15 +74,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A5C939C2FE393260028FDD2 /* _MapboxNavigationLocalization in Frameworks */,
+				0A5C93B22FE446F20028FDD2 /* MapboxNavigationUIKit in Frameworks */,
 				0A5C93A62FE3935C0028FDD2 /* MapboxSearch in Frameworks */,
-				0A5C939A2FE393260028FDD2 /* MapboxNavigationUIKit in Frameworks */,
-				0A5C93982FE393260028FDD2 /* MapboxNavigationCore in Frameworks */,
 				0A5C93A82FE3935C0028FDD2 /* MapboxSearchUI in Frameworks */,
-				0A5C93962FE393260028FDD2 /* MapboxDirections in Frameworks */,
-				0A5C939E2FE393260028FDD2 /* _MapboxNavigationTestKit in Frameworks */,
-				0A5C93A32FE393400028FDD2 /* MapboxMaps in Frameworks */,
-				0A5C93A02FE393260028FDD2 /* mapbox-directions-swift in Frameworks */,
+				0A5C93AB2FE4462F0028FDD2 /* MapboxMaps in Frameworks */,
+				0A5C93B02FE446F20028FDD2 /* MapboxNavigationCore in Frameworks */,
+				0A5C93AE2FE446F20028FDD2 /* MapboxDirections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,15 +140,12 @@
 			);
 			name = ScenicRoutes;
 			packageProductDependencies = (
-				0A5C93952FE393260028FDD2 /* MapboxDirections */,
-				0A5C93972FE393260028FDD2 /* MapboxNavigationCore */,
-				0A5C93992FE393260028FDD2 /* MapboxNavigationUIKit */,
-				0A5C939B2FE393260028FDD2 /* _MapboxNavigationLocalization */,
-				0A5C939D2FE393260028FDD2 /* _MapboxNavigationTestKit */,
-				0A5C939F2FE393260028FDD2 /* mapbox-directions-swift */,
-				0A5C93A22FE393400028FDD2 /* MapboxMaps */,
 				0A5C93A52FE3935C0028FDD2 /* MapboxSearch */,
 				0A5C93A72FE3935C0028FDD2 /* MapboxSearchUI */,
+				0A5C93AA2FE4462F0028FDD2 /* MapboxMaps */,
+				0A5C93AD2FE446F20028FDD2 /* MapboxDirections */,
+				0A5C93AF2FE446F20028FDD2 /* MapboxNavigationCore */,
+				0A5C93B12FE446F20028FDD2 /* MapboxNavigationUIKit */,
 			);
 			productName = ScenicRoutes;
 			productReference = 0A14ABCE2FE340CA00CB31AB /* ScenicRoutes.app */;
@@ -239,9 +230,9 @@
 			mainGroup = 0A14ABC52FE340CA00CB31AB;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				0A5C93942FE393260028FDD2 /* XCRemoteSwiftPackageReference "mapbox-navigation-ios" */,
-				0A5C93A12FE393400028FDD2 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */,
 				0A5C93A42FE3935C0028FDD2 /* XCRemoteSwiftPackageReference "search-ios" */,
+				0A5C93A92FE4462F0028FDD2 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */,
+				0A5C93AC2FE446F20028FDD2 /* XCRemoteSwiftPackageReference "mapbox-navigation-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0A14ABCF2FE340CA00CB31AB /* Products */;
@@ -632,22 +623,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0A5C93942FE393260028FDD2 /* XCRemoteSwiftPackageReference "mapbox-navigation-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mapbox/mapbox-navigation-ios.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.25.0;
-			};
-		};
-		0A5C93A12FE393400028FDD2 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mapbox/mapbox-maps-ios.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 11.25.0;
-			};
-		};
 		0A5C93A42FE3935C0028FDD2 /* XCRemoteSwiftPackageReference "search-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mapbox/search-ios.git";
@@ -656,44 +631,25 @@
 				minimumVersion = 2.25.0;
 			};
 		};
+		0A5C93A92FE4462F0028FDD2 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mapbox/mapbox-maps-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.25.0;
+			};
+		};
+		0A5C93AC2FE446F20028FDD2 /* XCRemoteSwiftPackageReference "mapbox-navigation-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mapbox/mapbox-navigation-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.25.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0A5C93952FE393260028FDD2 /* MapboxDirections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0A5C93942FE393260028FDD2 /* XCRemoteSwiftPackageReference "mapbox-navigation-ios" */;
-			productName = MapboxDirections;
-		};
-		0A5C93972FE393260028FDD2 /* MapboxNavigationCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0A5C93942FE393260028FDD2 /* XCRemoteSwiftPackageReference "mapbox-navigation-ios" */;
-			productName = MapboxNavigationCore;
-		};
-		0A5C93992FE393260028FDD2 /* MapboxNavigationUIKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0A5C93942FE393260028FDD2 /* XCRemoteSwiftPackageReference "mapbox-navigation-ios" */;
-			productName = MapboxNavigationUIKit;
-		};
-		0A5C939B2FE393260028FDD2 /* _MapboxNavigationLocalization */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0A5C93942FE393260028FDD2 /* XCRemoteSwiftPackageReference "mapbox-navigation-ios" */;
-			productName = _MapboxNavigationLocalization;
-		};
-		0A5C939D2FE393260028FDD2 /* _MapboxNavigationTestKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0A5C93942FE393260028FDD2 /* XCRemoteSwiftPackageReference "mapbox-navigation-ios" */;
-			productName = _MapboxNavigationTestKit;
-		};
-		0A5C939F2FE393260028FDD2 /* mapbox-directions-swift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0A5C93942FE393260028FDD2 /* XCRemoteSwiftPackageReference "mapbox-navigation-ios" */;
-			productName = "mapbox-directions-swift";
-		};
-		0A5C93A22FE393400028FDD2 /* MapboxMaps */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0A5C93A12FE393400028FDD2 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */;
-			productName = MapboxMaps;
-		};
 		0A5C93A52FE3935C0028FDD2 /* MapboxSearch */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0A5C93A42FE3935C0028FDD2 /* XCRemoteSwiftPackageReference "search-ios" */;
@@ -703,6 +659,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0A5C93A42FE3935C0028FDD2 /* XCRemoteSwiftPackageReference "search-ios" */;
 			productName = MapboxSearchUI;
+		};
+		0A5C93AA2FE4462F0028FDD2 /* MapboxMaps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A5C93A92FE4462F0028FDD2 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */;
+			productName = MapboxMaps;
+		};
+		0A5C93AD2FE446F20028FDD2 /* MapboxDirections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A5C93AC2FE446F20028FDD2 /* XCRemoteSwiftPackageReference "mapbox-navigation-ios" */;
+			productName = MapboxDirections;
+		};
+		0A5C93AF2FE446F20028FDD2 /* MapboxNavigationCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A5C93AC2FE446F20028FDD2 /* XCRemoteSwiftPackageReference "mapbox-navigation-ios" */;
+			productName = MapboxNavigationCore;
+		};
+		0A5C93B12FE446F20028FDD2 /* MapboxNavigationUIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A5C93AC2FE446F20028FDD2 /* XCRemoteSwiftPackageReference "mapbox-navigation-ios" */;
+			productName = MapboxNavigationUIKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
