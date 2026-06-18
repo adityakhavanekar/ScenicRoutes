@@ -1,0 +1,645 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0A14AC072FE3419B00CB31AB /* MapboxMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 0A14AC062FE3419B00CB31AB /* MapboxMaps */; };
+		0A14AC0A2FE3447200CB31AB /* MapboxDirections in Frameworks */ = {isa = PBXBuildFile; productRef = 0A14AC092FE3447200CB31AB /* MapboxDirections */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0A14ABE12FE340CB00CB31AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A14ABC62FE340CA00CB31AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0A14ABCD2FE340CA00CB31AB;
+			remoteInfo = ScenicRoutes;
+		};
+		0A14ABEB2FE340CB00CB31AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A14ABC62FE340CA00CB31AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0A14ABCD2FE340CA00CB31AB;
+			remoteInfo = ScenicRoutes;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0A14ABCE2FE340CA00CB31AB /* ScenicRoutes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScenicRoutes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A14ABE02FE340CB00CB31AB /* ScenicRoutesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScenicRoutesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A14ABEA2FE340CB00CB31AB /* ScenicRoutesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScenicRoutesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		0A14AC042FE3416200CB31AB /* Exceptions for "ScenicRoutes" folder in "ScenicRoutes" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 0A14ABCD2FE340CA00CB31AB /* ScenicRoutes */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		0A14ABD02FE340CA00CB31AB /* ScenicRoutes */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				0A14AC042FE3416200CB31AB /* Exceptions for "ScenicRoutes" folder in "ScenicRoutes" target */,
+			);
+			path = ScenicRoutes;
+			sourceTree = "<group>";
+		};
+		0A14ABE32FE340CB00CB31AB /* ScenicRoutesTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ScenicRoutesTests;
+			sourceTree = "<group>";
+		};
+		0A14ABED2FE340CB00CB31AB /* ScenicRoutesUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ScenicRoutesUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0A14ABCB2FE340CA00CB31AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A14AC072FE3419B00CB31AB /* MapboxMaps in Frameworks */,
+				0A14AC0A2FE3447200CB31AB /* MapboxDirections in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A14ABDD2FE340CB00CB31AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A14ABE72FE340CB00CB31AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0A14ABC52FE340CA00CB31AB = {
+			isa = PBXGroup;
+			children = (
+				0A14ABD02FE340CA00CB31AB /* ScenicRoutes */,
+				0A14ABE32FE340CB00CB31AB /* ScenicRoutesTests */,
+				0A14ABED2FE340CB00CB31AB /* ScenicRoutesUITests */,
+				0A14ABCF2FE340CA00CB31AB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0A14ABCF2FE340CA00CB31AB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0A14ABCE2FE340CA00CB31AB /* ScenicRoutes.app */,
+				0A14ABE02FE340CB00CB31AB /* ScenicRoutesTests.xctest */,
+				0A14ABEA2FE340CB00CB31AB /* ScenicRoutesUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0A14ABCD2FE340CA00CB31AB /* ScenicRoutes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A14ABF42FE340CB00CB31AB /* Build configuration list for PBXNativeTarget "ScenicRoutes" */;
+			buildPhases = (
+				0A14ABCA2FE340CA00CB31AB /* Sources */,
+				0A14ABCB2FE340CA00CB31AB /* Frameworks */,
+				0A14ABCC2FE340CA00CB31AB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				0A14ABD02FE340CA00CB31AB /* ScenicRoutes */,
+			);
+			name = ScenicRoutes;
+			packageProductDependencies = (
+				0A14AC062FE3419B00CB31AB /* MapboxMaps */,
+				0A14AC092FE3447200CB31AB /* MapboxDirections */,
+			);
+			productName = ScenicRoutes;
+			productReference = 0A14ABCE2FE340CA00CB31AB /* ScenicRoutes.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0A14ABDF2FE340CB00CB31AB /* ScenicRoutesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A14ABF72FE340CB00CB31AB /* Build configuration list for PBXNativeTarget "ScenicRoutesTests" */;
+			buildPhases = (
+				0A14ABDC2FE340CB00CB31AB /* Sources */,
+				0A14ABDD2FE340CB00CB31AB /* Frameworks */,
+				0A14ABDE2FE340CB00CB31AB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0A14ABE22FE340CB00CB31AB /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				0A14ABE32FE340CB00CB31AB /* ScenicRoutesTests */,
+			);
+			name = ScenicRoutesTests;
+			packageProductDependencies = (
+			);
+			productName = ScenicRoutesTests;
+			productReference = 0A14ABE02FE340CB00CB31AB /* ScenicRoutesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		0A14ABE92FE340CB00CB31AB /* ScenicRoutesUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A14ABFA2FE340CB00CB31AB /* Build configuration list for PBXNativeTarget "ScenicRoutesUITests" */;
+			buildPhases = (
+				0A14ABE62FE340CB00CB31AB /* Sources */,
+				0A14ABE72FE340CB00CB31AB /* Frameworks */,
+				0A14ABE82FE340CB00CB31AB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0A14ABEC2FE340CB00CB31AB /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				0A14ABED2FE340CB00CB31AB /* ScenicRoutesUITests */,
+			);
+			name = ScenicRoutesUITests;
+			packageProductDependencies = (
+			);
+			productName = ScenicRoutesUITests;
+			productReference = 0A14ABEA2FE340CB00CB31AB /* ScenicRoutesUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0A14ABC62FE340CA00CB31AB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2650;
+				LastUpgradeCheck = 2650;
+				TargetAttributes = {
+					0A14ABCD2FE340CA00CB31AB = {
+						CreatedOnToolsVersion = 26.5;
+					};
+					0A14ABDF2FE340CB00CB31AB = {
+						CreatedOnToolsVersion = 26.5;
+						TestTargetID = 0A14ABCD2FE340CA00CB31AB;
+					};
+					0A14ABE92FE340CB00CB31AB = {
+						CreatedOnToolsVersion = 26.5;
+						TestTargetID = 0A14ABCD2FE340CA00CB31AB;
+					};
+				};
+			};
+			buildConfigurationList = 0A14ABC92FE340CA00CB31AB /* Build configuration list for PBXProject "ScenicRoutes" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0A14ABC52FE340CA00CB31AB;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				0A14AC052FE3419A00CB31AB /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */,
+				0A14AC082FE3447200CB31AB /* XCRemoteSwiftPackageReference "mapbox-directions-swift" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 0A14ABCF2FE340CA00CB31AB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0A14ABCD2FE340CA00CB31AB /* ScenicRoutes */,
+				0A14ABDF2FE340CB00CB31AB /* ScenicRoutesTests */,
+				0A14ABE92FE340CB00CB31AB /* ScenicRoutesUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0A14ABCC2FE340CA00CB31AB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A14ABDE2FE340CB00CB31AB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A14ABE82FE340CB00CB31AB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0A14ABCA2FE340CA00CB31AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A14ABDC2FE340CB00CB31AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A14ABE62FE340CB00CB31AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0A14ABE22FE340CB00CB31AB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0A14ABCD2FE340CA00CB31AB /* ScenicRoutes */;
+			targetProxy = 0A14ABE12FE340CB00CB31AB /* PBXContainerItemProxy */;
+		};
+		0A14ABEC2FE340CB00CB31AB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0A14ABCD2FE340CA00CB31AB /* ScenicRoutes */;
+			targetProxy = 0A14ABEB2FE340CB00CB31AB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0A14ABF22FE340CB00CB31AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = P35TG23C96;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0A14ABF32FE340CB00CB31AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = P35TG23C96;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0A14ABF52FE340CB00CB31AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P35TG23C96;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ScenicRoutes/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = AKApps.ScenicRoutes;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0A14ABF62FE340CB00CB31AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P35TG23C96;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ScenicRoutes/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = AKApps.ScenicRoutes;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0A14ABF82FE340CB00CB31AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P35TG23C96;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = AKApps.ScenicRoutesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScenicRoutes.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ScenicRoutes";
+			};
+			name = Debug;
+		};
+		0A14ABF92FE340CB00CB31AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P35TG23C96;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = AKApps.ScenicRoutesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScenicRoutes.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ScenicRoutes";
+			};
+			name = Release;
+		};
+		0A14ABFB2FE340CB00CB31AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P35TG23C96;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = AKApps.ScenicRoutesUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ScenicRoutes;
+			};
+			name = Debug;
+		};
+		0A14ABFC2FE340CB00CB31AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P35TG23C96;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = AKApps.ScenicRoutesUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ScenicRoutes;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0A14ABC92FE340CA00CB31AB /* Build configuration list for PBXProject "ScenicRoutes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A14ABF22FE340CB00CB31AB /* Debug */,
+				0A14ABF32FE340CB00CB31AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0A14ABF42FE340CB00CB31AB /* Build configuration list for PBXNativeTarget "ScenicRoutes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A14ABF52FE340CB00CB31AB /* Debug */,
+				0A14ABF62FE340CB00CB31AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0A14ABF72FE340CB00CB31AB /* Build configuration list for PBXNativeTarget "ScenicRoutesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A14ABF82FE340CB00CB31AB /* Debug */,
+				0A14ABF92FE340CB00CB31AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0A14ABFA2FE340CB00CB31AB /* Build configuration list for PBXNativeTarget "ScenicRoutesUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A14ABFB2FE340CB00CB31AB /* Debug */,
+				0A14ABFC2FE340CB00CB31AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0A14AC052FE3419A00CB31AB /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mapbox/mapbox-maps-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
+		0A14AC082FE3447200CB31AB /* XCRemoteSwiftPackageReference "mapbox-directions-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mapbox/mapbox-directions-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.14.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0A14AC062FE3419B00CB31AB /* MapboxMaps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A14AC052FE3419A00CB31AB /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */;
+			productName = MapboxMaps;
+		};
+		0A14AC092FE3447200CB31AB /* MapboxDirections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A14AC082FE3447200CB31AB /* XCRemoteSwiftPackageReference "mapbox-directions-swift" */;
+			productName = MapboxDirections;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 0A14ABC62FE340CA00CB31AB /* Project object */;
+}
