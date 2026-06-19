@@ -24,34 +24,52 @@ class RouteViewModel: ObservableObject {
     @Published var viewState: ViewStates<NavigationRoutes> = .idle
     @Published var sourceText = ""
     @Published var destinationText = ""
-    @Published var useCurrentLocation = false
+    @Published var canNavigate = false
     
     private let placeAutocomplete = PlaceAutocomplete()
     private let locationManager = LocationManager()
     let navigationProvider = MapboxNavigationProvider(coreConfig: .init())
+    
+    // Call on app launch so current location is ready
+    func startLocationUpdates() {
+        locationManager.requestLocation()
+    }
+    
+    // Convenience: fill source as current location
+    func useMyCurrentLocation() {
+        sourceText = "Current Location"
+        locationManager.requestLocation()
+    }
     
     func fetchRoute() {
         viewState = .loading
         
         Task {
             let sourceCoord: CLLocationCoordinate2D
-            if useCurrentLocation{
-                guard let current = locationManager.currentLocation else {
-                    viewState = .error("Couldnt get your current location")
-                    return
-                }
+            if sourceText == "Current Location", let current = locationManager.currentLocation {
                 sourceCoord = current
-            }else{
+            } else {
                 guard let geocoded = await geocode(sourceText) else {
                     viewState = .error("Couldnt find source location")
                     return
                 }
                 sourceCoord = geocoded
             }
+            
             guard let destCoord = await geocode(destinationText) else {
                 viewState = .error("Couldnt find destination location")
                 return
             }
+            
+            // Distance check: is the source near the user's actual location?
+            if let current = locationManager.currentLocation {
+                let sourceLoc = CLLocation(latitude: sourceCoord.latitude, longitude: sourceCoord.longitude)
+                let currentLoc = CLLocation(latitude: current.latitude, longitude: current.longitude)
+                canNavigate = sourceLoc.distance(from: currentLoc) < 150  // within 150 meters
+            } else {
+                canNavigate = false
+            }
+            
             let options = NavigationRouteOptions(coordinates: [sourceCoord, destCoord])
             let request = navigationProvider.mapboxNavigation.routingProvider().calculateRoutes(options: options)
             switch await request.result {
@@ -91,11 +109,5 @@ class RouteViewModel: ObservableObject {
                 }
             }
         }
-    }
-    
-    func useMyCurrentLocation() {
-        useCurrentLocation = true
-        sourceText = "Current Location"
-        locationManager.requestLocation()
     }
 }

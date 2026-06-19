@@ -1,4 +1,4 @@
-            //
+//
 //  HomeView.swift
 //  ScenicRoutes
 //
@@ -25,7 +25,7 @@ struct HomeView: View {
                 ).ignoresSafeArea()
                 VStack{
                     Spacer()
-                    if viewModel.useCurrentLocation{
+                    if viewModel.canNavigate {
                         Button {
                             router.presentFullScreen(.navigation)
                         } label: {
@@ -42,7 +42,14 @@ struct HomeView: View {
                         }
                         .padding(.horizontal)
                         .padding(.bottom, 30)
-                        
+                    } else {
+                        Text("Preview only — navigation starts from your location")
+                            .font(.caption)
+                            .foregroundStyle(.white)
+                            .padding()
+                            .background(Color.black.opacity(0.6))
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .padding(.bottom, 30)
                     }
                 }
             case .error(let string):
@@ -57,11 +64,7 @@ struct HomeView: View {
                     .background(Color.white)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .shadow(radius: 2)
-                    .onChange(of: viewModel.sourceText) { _, newValue in
-                        if newValue != "Current Location" {
-                            viewModel.useCurrentLocation = false
-                        }
-                    }
+                
                 Button {
                     viewModel.useMyCurrentLocation()
                 } label: {
@@ -73,6 +76,7 @@ struct HomeView: View {
                     .foregroundStyle(.blue)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
+                
                 TextField("Destination", text: $viewModel.destinationText)
                     .padding()
                     .background(Color.white)
@@ -95,7 +99,11 @@ struct HomeView: View {
                 Spacer()
             }
             .padding()
-        }.fullScreenCover(item: $router.presentedFullScreen) { route in
+        }
+        .onAppear {
+            viewModel.startLocationUpdates()
+        }
+        .fullScreenCover(item: $router.presentedFullScreen) { route in
             switch route {
             case .navigation:
                 if case .loaded(let routes) = viewModel.viewState {
@@ -119,23 +127,3 @@ extension UIApplication {
         sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
-
-//VStack {
-//    Spacer()
-//    Button {
-//        print("Navigation clicked")
-//    } label: {
-//        HStack {
-//            Image(systemName: "location.north.fill")
-//            Text("Start Navigation")
-//                .fontWeight(.semibold)
-//        }
-//        .foregroundStyle(.white)
-//        .frame(maxWidth: .infinity)
-//        .padding()
-//        .background(Color.blue)
-//        .clipShape(RoundedRectangle(cornerRadius: 14))
-//    }
-//    .padding(.horizontal)
-//    .padding(.bottom, 30)
-//}
