@@ -10,27 +10,73 @@ import MapboxNavigationCore
 import MapboxDirections
 import CoreLocation
 import Combine
+import MapboxSearch
+
+enum ViewStates<T>{
+    case idle
+    case loading
+    case loaded(T)
+    case error(String)
+}
 
 @MainActor
 class RouteViewModel: ObservableObject {
-    @Published var navigationRoutes: NavigationRoutes?
+    @Published var viewState: ViewStates<NavigationRoutes> = .idle
+    @Published var sourceText = ""
+    @Published var destinationText = ""
     
-    let binghamton = CLLocationCoordinate2D(latitude: 42.0987, longitude: -75.9180)
-    let newYork = CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060)
-    
+    private let placeAutocomplete = PlaceAutocomplete()
     let navigationProvider = MapboxNavigationProvider(coreConfig: .init())
     
     func fetchRoute() {
-        let options = NavigationRouteOptions(coordinates: [binghamton, newYork])
+        viewState = .loading
         
         Task {
+            guard let sourceCoord = await geocode(sourceText) else {
+                viewState = .error("Couldnt find source location")
+                return
+            }
+            guard let destCoord = await geocode(destinationText) else {
+                viewState = .error("Couldnt find destination location")
+                return
+            }
+            let options = NavigationRouteOptions(coordinates: [sourceCoord, destCoord])
             let request = navigationProvider.mapboxNavigation.routingProvider().calculateRoutes(options: options)
             switch await request.result {
             case .success(let routes):
-                self.navigationRoutes = routes
+                viewState = .loaded(routes)
                 print("routes loaded successfully")
             case .failure(let error):
+                viewState = .error("Error: \(error.localizedDescription)")
                 print("Error getting routes: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func geocode(_ query: String) async -> CLLocationCoordinate2D? {
+        await withCheckedContinuation { continuation in
+            placeAutocomplete.suggestions(for: query) { result in
+                switch result{
+                case .success(let suggestions):
+                    guard let first = suggestions.first else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    self.placeAutocomplete
+                        .select(suggestion: first) { selectionResult in
+                            switch selectionResult{
+                            case .success(let placeResult):
+                                continuation
+                                    .resume(returning: placeResult.coordinate)
+                            case .failure(let error):
+                                print("Select failed: \(error.localizedDescription)")
+                                continuation.resume(returning: nil)
+                            }
+                        }
+                case .failure(let error):
+                    print("Suggestions failed: \(error.localizedDescription)")
+                    continuation.resume(returning: nil)
+                }
             }
         }
     }

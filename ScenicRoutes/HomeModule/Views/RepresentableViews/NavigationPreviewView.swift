@@ -13,14 +13,14 @@ import Combine
 
 struct NavigationPreviewView: UIViewRepresentable{
     let navigationRoutes: NavigationRoutes
-    let navigationProdvider: MapboxNavigationProvider
+    let navigationProvider: MapboxNavigationProvider
     
     func makeUIView(context: Context) -> NavigationMapView {
         let view = NavigationMapView(
-            location: navigationProdvider.mapboxNavigation.navigation().locationMatching
+            location: navigationProvider.mapboxNavigation.navigation().locationMatching
                 .map(\.enhancedLocation)
                 .eraseToAnyPublisher(),
-            routeProgress: navigationProdvider.mapboxNavigation.navigation().routeProgress
+            routeProgress: navigationProvider.mapboxNavigation.navigation().routeProgress
                 .map(\.?.routeProgress)
                 .eraseToAnyPublisher()
         )
