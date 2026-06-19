@@ -24,17 +24,29 @@ class RouteViewModel: ObservableObject {
     @Published var viewState: ViewStates<NavigationRoutes> = .idle
     @Published var sourceText = ""
     @Published var destinationText = ""
+    @Published var useCurrentLocation = false
     
     private let placeAutocomplete = PlaceAutocomplete()
+    private let locationManager = LocationManager()
     let navigationProvider = MapboxNavigationProvider(coreConfig: .init())
     
     func fetchRoute() {
         viewState = .loading
         
         Task {
-            guard let sourceCoord = await geocode(sourceText) else {
-                viewState = .error("Couldnt find source location")
-                return
+            let sourceCoord: CLLocationCoordinate2D
+            if useCurrentLocation{
+                guard let current = locationManager.currentLocation else {
+                    viewState = .error("Couldnt get your current location")
+                    return
+                }
+                sourceCoord = current
+            }else{
+                guard let geocoded = await geocode(sourceText) else {
+                    viewState = .error("Couldnt find source location")
+                    return
+                }
+                sourceCoord = geocoded
             }
             guard let destCoord = await geocode(destinationText) else {
                 viewState = .error("Couldnt find destination location")
@@ -79,5 +91,11 @@ class RouteViewModel: ObservableObject {
                 }
             }
         }
+    }
+    
+    func useMyCurrentLocation() {
+        useCurrentLocation = true
+        sourceText = "Current Location"
+        locationManager.requestLocation()
     }
 }
