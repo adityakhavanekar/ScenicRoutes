@@ -12,6 +12,11 @@ enum Route: Hashable{
     case settings
 }
 
+enum SheetRoute: Identifiable {
+    case search(SearchField)
+    var id: String { String(describing: self) }
+}
+
 enum FullScreenRoute:Identifiable{
     case navigation
     var id:String {String(describing:self)}
@@ -21,6 +26,7 @@ enum FullScreenRoute:Identifiable{
 final class Router: ObservableObject{
     @Published var path = NavigationPath()
     @Published var presentedFullScreen: FullScreenRoute?
+    @Published var presentedSheet: SheetRoute?
     
     func push(_ route: Route){
         path.append(route)
@@ -41,5 +47,13 @@ final class Router: ObservableObject{
     
     func dismissFullScreen(){
         presentedFullScreen = nil
+    }
+    
+    func presentSheet(_ route: SheetRoute) {
+        presentedSheet = route
+    }
+
+    func dismissSheet() {
+        presentedSheet = nil
     }
 }

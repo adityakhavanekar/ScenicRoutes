@@ -19,16 +19,90 @@ enum ViewStates<T>{
     case error(String)
 }
 
+enum SearchField {
+    case source
+    case destination
+}
+
 @MainActor
 class RouteViewModel: ObservableObject {
     @Published var viewState: ViewStates<NavigationRoutes> = .idle
     @Published var sourceText = ""
     @Published var destinationText = ""
     @Published var canNavigate = false
+    @Published var searchSuggestions: [PlaceAutocomplete.Suggestion] = []
+    @Published var searchQuery = ""
+    private var sourceCoordinate: CLLocationCoordinate2D?
+    private var destinationCoordinate: CLLocationCoordinate2D?
+    private var cancellables = Set<AnyCancellable>()
+
     
     private let placeAutocomplete = PlaceAutocomplete()
     private let locationManager = LocationManager()
+    var activeSearchField: SearchField = .source
     let navigationProvider = MapboxNavigationProvider(coreConfig: .init())
+    
+    
+    init() {
+        $searchQuery
+            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
+            .removeDuplicates()
+            .sink { [weak self] query in
+                self?.fetchSuggestions(for: query)
+            }
+            .store(in: &cancellables)
+    }
+    func fetchSuggestions(for query: String) {
+        guard !query.isEmpty else {
+            searchSuggestions = []
+            return
+        }
+        placeAutocomplete.suggestions(for: query) { [weak self] result in
+            switch result {
+            case .success(let suggestions):
+                self?.searchSuggestions = suggestions
+            case .failure(let error):
+                print("Suggestions failed: \(error.localizedDescription)")
+                self?.searchSuggestions = []
+            }
+        }
+    }
+    
+    func selectFreeText(_ query: String) async {
+        guard let coordinate = await geocode(query) else {
+            print("Couldn't geocode: \(query)")
+            return
+        }
+        switch activeSearchField {
+        case .source:
+            sourceText = query
+            sourceCoordinate = coordinate
+        case .destination:
+            destinationText = query
+            destinationCoordinate = coordinate
+        }
+    }
+    
+    func selectSearchResult(_ suggestion: PlaceAutocomplete.Suggestion) {
+        placeAutocomplete.select(suggestion: suggestion) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let placeResult):
+                let coordinate = placeResult.coordinate
+                let name = suggestion.name
+                switch self.activeSearchField {
+                case .source:
+                    self.sourceText = name
+                    self.sourceCoordinate = coordinate
+                case .destination:
+                    self.destinationText = name
+                    self.destinationCoordinate = coordinate
+                }
+            case .failure(let error):
+                print("Selection failed: \(error.localizedDescription)")
+            }
+        }
+    }
     
     // Call on app launch so current location is ready
     func startLocationUpdates() {
@@ -109,5 +183,10 @@ class RouteViewModel: ObservableObject {
                 }
             }
         }
+    }
+    
+    func swapSourceAndDestination() {
+        swap(&sourceText, &destinationText)
+        swap(&sourceCoordinate, &destinationCoordinate)
     }
 }

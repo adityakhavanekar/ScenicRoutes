@@ -14,16 +14,16 @@ struct HomeView: View {
     @EnvironmentObject private var router: Router
     
     var body: some View {
-        ZStack{
+        ZStack {
             switch viewModel.viewState {
-            case .idle,.loading:
+            case .idle, .loading:
                 ProgressView("Enter source and destination")
             case .loaded(let t):
                 NavigationPreviewView(
                     navigationRoutes: t,
                     navigationProvider: viewModel.navigationProvider
                 ).ignoresSafeArea()
-                VStack{
+                VStack {
                     Spacer()
                     if viewModel.canNavigate {
                         Button {
@@ -58,47 +58,81 @@ struct HomeView: View {
                     .padding()
             }
             
-            VStack(spacing: 8) {
-                TextField("Source", text: $viewModel.sourceText)
-                    .padding()
-                    .background(Color.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .shadow(radius: 2)
-                
-                Button {
-                    viewModel.useMyCurrentLocation()
-                } label: {
-                    HStack {
-                        Image(systemName: "location.fill")
-                        Text("Use Current Location")
-                            .font(.subheadline)
+            VStack {
+                VStack(spacing: 10) {
+                    // Two fields on the left, swap button centered on the right
+                    HStack(spacing: 10) {
+                        VStack(spacing: 10) {
+                            // Source field
+                            Button {
+                                viewModel.activeSearchField = .source
+                                router.presentSheet(.search(.source))
+                            } label: {
+                                HStack {
+                                    Image(systemName: "circle")
+                                        .foregroundStyle(.green)
+                                    Text(viewModel.sourceText.isEmpty ? "Choose source" : viewModel.sourceText)
+                                        .foregroundStyle(viewModel.sourceText.isEmpty ? Color.gray : Color.black)
+                                    Spacer()
+                                }
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 10)
+                                .background(Color(white: 0.95))
+                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                            }
+                            
+                            // Destination field
+                            Button {
+                                viewModel.activeSearchField = .destination
+                                router.presentSheet(.search(.destination))
+                            } label: {
+                                HStack {
+                                    Image(systemName: "mappin.circle.fill")
+                                        .foregroundStyle(.red)
+                                    Text(viewModel.destinationText.isEmpty ? "Choose destination" : viewModel.destinationText)
+                                        .foregroundStyle(viewModel.destinationText.isEmpty ? Color.gray : Color.black)
+                                    Spacer()
+                                }
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 10)
+                                .background(Color(white: 0.95))
+                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                            }
+                        }
+                        
+                        // Swap button centered to the right of both fields
+                        Button {
+                            viewModel.swapSourceAndDestination()
+                        } label: {
+                            Image(systemName: "arrow.up.arrow.down")
+                                .foregroundStyle(.blue)
+                                .padding(8)
+                                .background(Color(white: 0.95))
+                                .clipShape(Circle())
+                        }
                     }
-                    .foregroundStyle(.blue)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    // Find route
+                    Button {
+                        viewModel.fetchRoute()
+                    } label: {
+                        Text("Find Route")
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 12)
+                            .background(Color.blue)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                    }
                 }
-                
-                TextField("Destination", text: $viewModel.destinationText)
-                    .padding()
-                    .background(Color.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .shadow(radius: 2)
-                
-                Button {
-                    UIApplication.shared.dismissKeyboard()
-                    viewModel.fetchRoute()
-                } label: {
-                    Text("Find Route")
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.green)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                }
+                .padding()
+                .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .shadow(color: .black.opacity(0.15), radius: 8)
+                .padding()
                 
                 Spacer()
             }
-            .padding()
         }
         .onAppear {
             viewModel.startLocationUpdates()
@@ -115,11 +149,21 @@ struct HomeView: View {
                 }
             }
         }
+        .sheet(item: $router.presentedSheet) { route in
+            switch route {
+            case .search(let field):
+                SearchView(viewModel: viewModel)
+                    .onAppear {
+                        viewModel.activeSearchField = field
+                    }
+            }
+        }
     }
 }
 
 #Preview {
     HomeView()
+        .environmentObject(Router())
 }
 
 extension UIApplication {
