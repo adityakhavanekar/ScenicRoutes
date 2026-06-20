@@ -26,10 +26,10 @@ struct HomeView: View {
             case .loading:
                 idleMap
                 ProgressView("Finding route...")
-                    .padding()
-                    .background(Color.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .shadow(radius: 4)
+                    .padding(20)
+                    .background(AppTheme.cardBackground)
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .shadow(color: .black.opacity(0.15), radius: 10)
             case .loaded(let t):
                 NavigationPreviewView(
                     navigationRoutes: t,
@@ -47,13 +47,15 @@ struct HomeView: View {
                             HStack {
                                 Image(systemName: "location.north.fill")
                                 Text("Start Navigation")
-                                    .fontWeight(.semibold)
+                                    .fontWeight(.bold)
                             }
+                            .font(.system(size: 17))
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.blue)
-                            .clipShape(RoundedRectangle(cornerRadius: 14))
+                            .padding(.vertical, 16)
+                            .background(AppTheme.accent)
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                            .shadow(color: AppTheme.accent.opacity(0.4), radius: 10, y: 4)
                         }
                         .padding(.horizontal)
                         .padding(.bottom, 30)
@@ -62,8 +64,8 @@ struct HomeView: View {
                             .font(.caption)
                             .foregroundStyle(.white)
                             .padding()
-                            .background(Color.black.opacity(0.6))
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .background(Color.black.opacity(0.65))
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                             .padding(.bottom, 30)
                     }
                 }
@@ -72,11 +74,11 @@ struct HomeView: View {
                 Text(string)
                     .foregroundStyle(.white)
                     .padding()
-                    .background(Color.red.opacity(0.8))
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .background(AppTheme.accent.opacity(0.9))
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
             }
             
-            // Top input layer: single search (browse) OR source/destination (route mode)
+            // Top input layer
             VStack {
                 if viewModel.hasStartedRouting {
                     routeFieldsCard
@@ -112,102 +114,113 @@ struct HomeView: View {
         }
     }
     
-    // Browse mode: single search bar
+    // MARK: - Browse mode: single search bar
     private var searchBar: some View {
         Button {
             viewModel.activeSearchField = .destination
             router.presentSheet(.search(.destination))
         } label: {
-            HStack {
+            HStack(spacing: 12) {
                 Image(systemName: "magnifyingglass")
-                    .foregroundStyle(.gray)
-                Text("Search destination")
-                    .foregroundStyle(.gray)
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundStyle(AppTheme.primary)
+                Text("Where to?")
+                    .font(.system(size: 17, weight: .medium))
+                    .foregroundStyle(AppTheme.textSecondary)
                 Spacer()
             }
-            .padding()
-            .background(Color.white)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-            .shadow(color: .black.opacity(0.15), radius: 6)
+            .padding(.horizontal, 18)
+            .padding(.vertical, 16)
+            .background(AppTheme.cardBackground)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .shadow(color: AppTheme.primary.opacity(0.18), radius: 12, y: 4)
         }
         .padding()
     }
     
-    // Route mode: source/destination fields with swap + back
+    // MARK: - Route mode: source/destination card
     private var routeFieldsCard: some View {
-        VStack(spacing: 10) {
-            HStack(spacing: 10) {
-                // Back button on the left
-                Button {
-                    viewModel.resetRouting()
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .foregroundStyle(.black)
+        HStack(spacing: 12) {
+            // Back button
+            Button {
+                viewModel.resetRouting()
+            } label: {
+                Image(systemName: "chevron.left")
+                    .font(.system(size: 18, weight: .bold))
+                    .foregroundStyle(AppTheme.primary)
+            }
+            
+            // Fields
+            VStack(spacing: 10) {
+                fieldRow(
+                    icon: "circle.fill",
+                    iconColor: AppTheme.success,
+                    text: viewModel.sourceText,
+                    placeholder: "Choose source"
+                ) {
+                    viewModel.activeSearchField = .source
+                    router.presentSheet(.search(.source))
                 }
                 
-                // The two fields in the middle
-                VStack(spacing: 10) {
-                    Button {
-                        viewModel.activeSearchField = .source
-                        router.presentSheet(.search(.source))
-                    } label: {
-                        HStack {
-                            Image(systemName: "circle")
-                                .foregroundStyle(.green)
-                            Text(viewModel.sourceText.isEmpty ? "Choose source" : viewModel.sourceText)
-                                .foregroundStyle(viewModel.sourceText.isEmpty ? Color.gray : Color.black)
-                            Spacer()
-                        }
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 10)
-                        .background(Color(white: 0.95))
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                    }
-                    
-                    Button {
-                        viewModel.activeSearchField = .destination
-                        router.presentSheet(.search(.destination))
-                    } label: {
-                        HStack {
-                            Image(systemName: "mappin.circle.fill")
-                                .foregroundStyle(.red)
-                            Text(viewModel.destinationText.isEmpty ? "Choose destination" : viewModel.destinationText)
-                                .foregroundStyle(viewModel.destinationText.isEmpty ? Color.gray : Color.black)
-                            Spacer()
-                        }
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 10)
-                        .background(Color(white: 0.95))
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                    }
-                }
-                
-                // Swap button on the right
-                Button {
-                    viewModel.swapSourceAndDestination()
-                } label: {
-                    Image(systemName: "arrow.up.arrow.down")
-                        .foregroundStyle(.blue)
-                        .padding(8)
-                        .background(Color(white: 0.95))
-                        .clipShape(Circle())
+                fieldRow(
+                    icon: "mappin.circle.fill",
+                    iconColor: AppTheme.accent,
+                    text: viewModel.destinationText,
+                    placeholder: "Choose destination"
+                ) {
+                    viewModel.activeSearchField = .destination
+                    router.presentSheet(.search(.destination))
                 }
             }
+            
+            // Swap button
+            Button {
+                viewModel.swapSourceAndDestination()
+            } label: {
+                Image(systemName: "arrow.up.arrow.down")
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundStyle(.white)
+                    .padding(10)
+                    .background(AppTheme.primary)
+                    .clipShape(Circle())
+                    .shadow(color: AppTheme.primary.opacity(0.4), radius: 6, y: 2)
+            }
         }
-        .padding()
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 16))
-        .shadow(color: .black.opacity(0.15), radius: 8)
+        .padding(16)
+        .background(AppTheme.cardBackground)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .shadow(color: .black.opacity(0.12), radius: 14, y: 4)
         .padding()
     }
     
+    // MARK: - Reusable field row
+    private func fieldRow(icon: String, iconColor: Color, text: String, placeholder: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack(spacing: 10) {
+                Image(systemName: icon)
+                    .font(.system(size: 14))
+                    .foregroundStyle(iconColor)
+                Text(text.isEmpty ? placeholder : text)
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundStyle(text.isEmpty ? AppTheme.textSecondary : AppTheme.textPrimary)
+                    .lineLimit(1)
+                Spacer()
+            }
+            .padding(.horizontal, 14)
+            .padding(.vertical, 12)
+            .background(AppTheme.fieldBackground)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+        }
+    }
+    
+    // MARK: - Idle map
     private var idleMap: some View {
         Map(viewport: $viewport) {
             Puck2D(bearing: .heading)
         }
         .ignoresSafeArea()
         .onChange(of: viewModel.currentUserLocation) { _, newLocation in
-            if let loc = newLocation {
+            if newLocation != nil {
                 viewport = .followPuck(zoom: 14)
             }
         }

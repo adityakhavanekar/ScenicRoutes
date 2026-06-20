@@ -10,7 +10,7 @@ struct SearchView: View {
             // Search field
             HStack {
                 Image(systemName: "magnifyingglass")
-                    .foregroundStyle(.gray)
+                    .foregroundStyle(AppTheme.primary)
                 TextField("Search for a place", text: $viewModel.searchQuery)
                     .autocorrectionDisabled()
                     .onSubmit {
@@ -21,6 +21,7 @@ struct SearchView: View {
                     viewModel.searchSuggestions = []
                     dismiss()
                 }
+                .foregroundStyle(AppTheme.primary)
             }
             .padding()
             .background(Color(.systemGray6))
@@ -35,9 +36,9 @@ struct SearchView: View {
                 } label: {
                     HStack {
                         Image(systemName: "location.fill")
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(AppTheme.primary)
                         Text("Use Current Location")
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(AppTheme.primary)
                         Spacer()
                     }
                     .padding()
@@ -50,9 +51,21 @@ struct SearchView: View {
                 Button {
                     selectSuggestion(suggestion)
                 } label: {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(suggestion.name)
-                            .foregroundStyle(.primary)
+                    HStack(spacing: 12) {
+                        Image(systemName: "mappin.circle.fill")
+                            .foregroundStyle(AppTheme.accent)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(suggestion.name)
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundStyle(.primary)
+                            if let address = suggestion.description {
+                                Text(address)
+                                    .font(.system(size: 13))
+                                    .foregroundStyle(.secondary)
+                                    .lineLimit(1)
+                            }
+                        }
+                        Spacer()
                     }
                 }
             }
