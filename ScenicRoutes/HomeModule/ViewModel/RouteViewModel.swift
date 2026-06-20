@@ -32,16 +32,16 @@ class RouteViewModel: ObservableObject {
     @Published var canNavigate = false
     @Published var searchSuggestions: [PlaceAutocomplete.Suggestion] = []
     @Published var searchQuery = ""
+    @Published var currentUserLocation: CLLocationCoordinate2D?
+    @Published var hasStartedRouting = false
     private var sourceCoordinate: CLLocationCoordinate2D?
     private var destinationCoordinate: CLLocationCoordinate2D?
     private var cancellables = Set<AnyCancellable>()
 
-    
     private let placeAutocomplete = PlaceAutocomplete()
     private let locationManager = LocationManager()
     var activeSearchField: SearchField = .source
     let navigationProvider = MapboxNavigationProvider(coreConfig: .init())
-    
     
     init() {
         $searchQuery
@@ -51,7 +51,12 @@ class RouteViewModel: ObservableObject {
                 self?.fetchSuggestions(for: query)
             }
             .store(in: &cancellables)
+        
+        locationManager.$currentLocation
+            .receive(on: RunLoop.main)
+            .assign(to: &$currentUserLocation)
     }
+    
     func fetchSuggestions(for query: String) {
         guard !query.isEmpty else {
             searchSuggestions = []
@@ -81,6 +86,7 @@ class RouteViewModel: ObservableObject {
             destinationText = query
             destinationCoordinate = coordinate
         }
+        onSelectionChanged()
     }
     
     func selectSearchResult(_ suggestion: PlaceAutocomplete.Suggestion) {
@@ -98,21 +104,44 @@ class RouteViewModel: ObservableObject {
                     self.destinationText = name
                     self.destinationCoordinate = coordinate
                 }
+                self.onSelectionChanged()
             case .failure(let error):
                 print("Selection failed: \(error.localizedDescription)")
             }
         }
     }
     
-    // Call on app launch so current location is ready
+    // Called after any source/destination selection
+    func onSelectionChanged() {
+        if !destinationText.isEmpty {
+            if sourceText.isEmpty {
+                sourceText = "Current Location"
+            }
+            hasStartedRouting = true
+            fetchRoute()
+        }
+    }
+    
     func startLocationUpdates() {
         locationManager.requestLocation()
     }
     
-    // Convenience: fill source as current location
     func useMyCurrentLocation() {
         sourceText = "Current Location"
+        sourceCoordinate = locationManager.currentLocation
         locationManager.requestLocation()
+        onSelectionChanged()
+    }
+    
+    // Reset back to browse mode
+    func resetRouting() {
+        hasStartedRouting = false
+        sourceText = ""
+        destinationText = ""
+        sourceCoordinate = nil
+        destinationCoordinate = nil
+        canNavigate = false
+        viewState = .idle
     }
     
     func fetchRoute() {
@@ -135,11 +164,10 @@ class RouteViewModel: ObservableObject {
                 return
             }
             
-            // Distance check: is the source near the user's actual location?
             if let current = locationManager.currentLocation {
                 let sourceLoc = CLLocation(latitude: sourceCoord.latitude, longitude: sourceCoord.longitude)
                 let currentLoc = CLLocation(latitude: current.latitude, longitude: current.longitude)
-                canNavigate = sourceLoc.distance(from: currentLoc) < 150  // within 150 meters
+                canNavigate = sourceLoc.distance(from: currentLoc) < 150
             } else {
                 canNavigate = false
             }
@@ -170,8 +198,7 @@ class RouteViewModel: ObservableObject {
                         .select(suggestion: first) { selectionResult in
                             switch selectionResult{
                             case .success(let placeResult):
-                                continuation
-                                    .resume(returning: placeResult.coordinate)
+                                continuation.resume(returning: placeResult.coordinate)
                             case .failure(let error):
                                 print("Select failed: \(error.localizedDescription)")
                                 continuation.resume(returning: nil)
@@ -188,5 +215,8 @@ class RouteViewModel: ObservableObject {
     func swapSourceAndDestination() {
         swap(&sourceText, &destinationText)
         swap(&sourceCoordinate, &destinationCoordinate)
+        if hasStartedRouting {
+            fetchRoute()
+        }
     }
 }
