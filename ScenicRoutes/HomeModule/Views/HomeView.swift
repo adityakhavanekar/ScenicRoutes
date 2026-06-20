@@ -136,17 +136,16 @@ struct HomeView: View {
     // Route mode: source/destination fields with swap + back
     private var routeFieldsCard: some View {
         VStack(spacing: 10) {
-            HStack {
+            HStack(spacing: 10) {
+                // Back button on the left
                 Button {
                     viewModel.resetRouting()
                 } label: {
                     Image(systemName: "chevron.left")
                         .foregroundStyle(.black)
                 }
-                Spacer()
-            }
-            
-            HStack(spacing: 10) {
+                
+                // The two fields in the middle
                 VStack(spacing: 10) {
                     Button {
                         viewModel.activeSearchField = .source
@@ -183,6 +182,7 @@ struct HomeView: View {
                     }
                 }
                 
+                // Swap button on the right
                 Button {
                     viewModel.swapSourceAndDestination()
                 } label: {
