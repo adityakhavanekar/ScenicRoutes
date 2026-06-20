@@ -116,6 +116,7 @@ class RouteViewModel: ObservableObject {
         if !destinationText.isEmpty {
             if sourceText.isEmpty {
                 sourceText = "Current Location"
+                sourceCoordinate = locationManager.currentLocation   // 👈 add this
             }
             hasStartedRouting = true
             fetchRoute()
@@ -128,8 +129,7 @@ class RouteViewModel: ObservableObject {
     
     func useMyCurrentLocation() {
         sourceText = "Current Location"
-        sourceCoordinate = locationManager.currentLocation
-        locationManager.requestLocation()
+        sourceCoordinate = locationManager.currentLocation   // 👈 add this
         onSelectionChanged()
     }
     
@@ -145,25 +145,14 @@ class RouteViewModel: ObservableObject {
     }
     
     func fetchRoute() {
+        guard let sourceCoord = sourceCoordinate, let destCoord = destinationCoordinate else {
+            viewState = .error("Missing location coordinates")
+            return
+        }
+
         viewState = .loading
-        
+
         Task {
-            let sourceCoord: CLLocationCoordinate2D
-            if sourceText == "Current Location", let current = locationManager.currentLocation {
-                sourceCoord = current
-            } else {
-                guard let geocoded = await geocode(sourceText) else {
-                    viewState = .error("Couldnt find source location")
-                    return
-                }
-                sourceCoord = geocoded
-            }
-            
-            guard let destCoord = await geocode(destinationText) else {
-                viewState = .error("Couldnt find destination location")
-                return
-            }
-            
             if let current = locationManager.currentLocation {
                 let sourceLoc = CLLocation(latitude: sourceCoord.latitude, longitude: sourceCoord.longitude)
                 let currentLoc = CLLocation(latitude: current.latitude, longitude: current.longitude)
@@ -171,7 +160,7 @@ class RouteViewModel: ObservableObject {
             } else {
                 canNavigate = false
             }
-            
+
             let options = NavigationRouteOptions(coordinates: [sourceCoord, destCoord])
             let request = navigationProvider.mapboxNavigation.routingProvider().calculateRoutes(options: options)
             switch await request.result {

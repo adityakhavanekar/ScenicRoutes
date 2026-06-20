@@ -205,7 +205,7 @@ struct HomeView: View {
         .ignoresSafeArea()
         .onChange(of: viewModel.currentUserLocation) { _, newLocation in
             if let loc = newLocation {
-                viewport = .camera(center: loc, zoom: 14)
+                viewport = .followPuck(zoom: 14)
             }
         }
     }
