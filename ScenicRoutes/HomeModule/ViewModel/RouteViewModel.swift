@@ -144,6 +144,8 @@ class RouteViewModel: ObservableObject {
         viewState = .idle
     }
     
+    func updateSelectedRoutes(_ routes: NavigationRoutes) { viewState = .loaded(routes) }
+    
     func fetchRoute() {
         guard let sourceCoord = sourceCoordinate, let destCoord = destinationCoordinate else {
             viewState = .error("Missing location coordinates")

@@ -33,7 +33,10 @@ struct HomeView: View {
             case .loaded(let t):
                 NavigationPreviewView(
                     navigationRoutes: t,
-                    navigationProvider: viewModel.navigationProvider
+                    navigationProvider: viewModel.navigationProvider,
+                    onRouteSelected: { newRoutes in
+                        viewModel.updateSelectedRoutes(newRoutes)
+                    }
                 ).ignoresSafeArea()
                 VStack {
                     Spacer()

@@ -1,20 +1,18 @@
-//
-//  NavigationPreviewView.swift
-//  ScenicRoutes
-//
-//  Created by Aditya Khavanekar on 6/18/26.
-//
-
 import SwiftUI
 import MapboxNavigationCore
 import MapboxMaps
-import MapboxNavigationUIKit
 import Combine
+import MapboxDirections
 
-struct NavigationPreviewView: UIViewRepresentable{
+struct NavigationPreviewView: UIViewRepresentable {
     let navigationRoutes: NavigationRoutes
     let navigationProvider: MapboxNavigationProvider
-    
+    var onRouteSelected: ((NavigationRoutes) -> Void)? = nil
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
     func makeUIView(context: Context) -> NavigationMapView {
         let view = NavigationMapView(
             location: navigationProvider.mapboxNavigation.navigation().locationMatching
@@ -24,13 +22,47 @@ struct NavigationPreviewView: UIViewRepresentable{
                 .map(\.?.routeProgress)
                 .eraseToAnyPublisher()
         )
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            view.showcase(navigationRoutes, animated: true)
+        view.delegate = context.coordinator
+
+        // Set an initial camera near the route's start so it never opens at the globe
+        if let firstCoord = navigationRoutes.mainRoute.route.shape?.coordinates.first {
+            view.mapView.mapboxMap.setCamera(to: CameraOptions(center: firstCoord, zoom: 6))
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            view.showcase(navigationRoutes, animated: false)
         }
         return view
     }
-    
+
     func updateUIView(_ uiView: NavigationMapView, context: Context) {
-        uiView.showcase(navigationRoutes, animated: true)
+        // Keep the coordinator's routes in sync with what's displayed
+        context.coordinator.currentRoutes = navigationRoutes
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            uiView.showcase(navigationRoutes, animated: false)
+        }
+    }
+
+    // MARK: - Coordinator (handles delegate callbacks)
+    class Coordinator: NSObject, NavigationMapViewDelegate {
+        let parent: NavigationPreviewView
+        var currentRoutes: NavigationRoutes
+
+        init(_ parent: NavigationPreviewView) {
+            self.parent = parent
+            self.currentRoutes = parent.navigationRoutes
+        }
+
+        func navigationMapView(_ navigationMapView: NavigationMapView, didSelect alternativeRoute: AlternativeRoute) {
+            Task {
+                if let updated = await currentRoutes.selecting(alternativeRoute: alternativeRoute) {
+                    await MainActor.run {
+                        self.currentRoutes = updated
+                        navigationMapView.showcase(updated, animated: true)
+                        parent.onRouteSelected?(updated)
+                    }
+                }
+            }
+        }
     }
 }
