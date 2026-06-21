@@ -82,6 +82,7 @@ struct HomeView: View {
             VStack {
                 if viewModel.hasStartedRouting {
                     routeFieldsCard
+                    scenicOptionsBar
                 } else {
                     searchBar
                 }
@@ -191,6 +192,39 @@ struct HomeView: View {
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(color: .black.opacity(0.12), radius: 14, y: 4)
         .padding()
+    }
+    
+    // MARK: - Scenic options bar
+    private var scenicOptionsBar: some View {
+        Group {
+            if !viewModel.scenicWaypoints.isEmpty {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 8) {
+                        ForEach(viewModel.scenicWaypoints) { waypoint in
+                            Button {
+                                viewModel.routeThroughScenic(waypoint)
+                            } label: {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(waypoint.name)
+                                        .font(.system(size: 13, weight: .semibold))
+                                        .lineLimit(1)
+                                    Text(waypoint.state)
+                                        .font(.system(size: 11))
+                                        .foregroundStyle(.secondary)
+                                }
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 8)
+                                .background(AppTheme.cardBackground)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .shadow(color: .black.opacity(0.1), radius: 4)
+                            }
+                            .foregroundStyle(AppTheme.textPrimary)
+                        }
+                    }
+                    .padding(.horizontal)
+                }
+            }
+        }
     }
     
     // MARK: - Reusable field row

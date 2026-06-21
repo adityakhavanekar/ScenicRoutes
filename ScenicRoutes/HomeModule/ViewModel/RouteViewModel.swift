@@ -26,6 +26,7 @@ enum SearchField {
 
 @MainActor
 class RouteViewModel: ObservableObject {
+    @Published var scenicWaypoints: [ScenicWaypoint] = []
     @Published var viewState: ViewStates<NavigationRoutes> = .idle
     @Published var sourceText = ""
     @Published var destinationText = ""
@@ -112,16 +113,6 @@ class RouteViewModel: ObservableObject {
     }
     
     // Called after any source/destination selection
-    func onSelectionChanged() {
-        if !destinationText.isEmpty {
-            if sourceText.isEmpty {
-                sourceText = "Current Location"
-                sourceCoordinate = locationManager.currentLocation   // 👈 add this
-            }
-            hasStartedRouting = true
-            fetchRoute()
-        }
-    }
     
     func startLocationUpdates() {
         locationManager.requestLocation()
@@ -208,6 +199,61 @@ class RouteViewModel: ObservableObject {
         swap(&sourceCoordinate, &destinationCoordinate)
         if hasStartedRouting {
             fetchRoute()
+        }
+    }
+    
+    func fetchScenicOptions() {
+        guard let source = sourceCoordinate, let dest = destinationCoordinate else {
+            return
+        }
+
+        Task {
+            do {
+                let waypoints = try await ScenicService.shared.fetchScenicWaypoints(
+                    sourceLat: source.latitude,
+                    sourceLon: source.longitude,
+                    destLat: dest.latitude,
+                    destLon: dest.longitude
+                )
+                self.scenicWaypoints = waypoints
+                print("Fetched \(waypoints.count) scenic options")
+            } catch {
+                print("Failed to fetch scenic options: \(error.localizedDescription)")
+            }
+        }
+    }
+    func onSelectionChanged() {
+        if !destinationText.isEmpty {
+            if sourceText.isEmpty {
+                sourceText = "Current Location"
+                sourceCoordinate = locationManager.currentLocation
+            }
+            hasStartedRouting = true
+            fetchRoute()
+            fetchScenicOptions()   // 👈 also fetch scenic options
+        }
+    }
+    
+    func routeThroughScenic(_ waypoint: ScenicWaypoint) {
+        guard let sourceCoord = sourceCoordinate, let destCoord = destinationCoordinate else {
+            return
+        }
+
+        viewState = .loading
+
+        Task {
+            // Insert the scenic waypoint BETWEEN source and destination
+            let coordinates = [sourceCoord, waypoint.coordinate, destCoord]
+            let options = NavigationRouteOptions(coordinates: coordinates)
+
+            let request = navigationProvider.mapboxNavigation.routingProvider().calculateRoutes(options: options)
+            switch await request.result {
+            case .success(let routes):
+                viewState = .loaded(routes)
+                print("Scenic route loaded through \(waypoint.name)")
+            case .failure(let error):
+                viewState = .error("Scenic route error: \(error.localizedDescription)")
+            }
         }
     }
 }
